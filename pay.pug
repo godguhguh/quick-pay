@@ -1,0 +1,90 @@
+include helps/common.pug
+	title 商品支付
+	style
+		include helps/vue.css
+body
+	div#main-container(v-cloak)
+		h1(class="mod-title")
+			span(class="ico_log ico-3" v-if="payType == 'WXPAY'")
+			span(class="ico_log ico-1" v-if="payType == 'ALIPAY'")
+		
+		div(class="mod-ct")
+			div(class="order")
+			
+			//-待支付金额
+			div(class="amount") ￥{{ payData.money }}
+			
+			//-支付宝移动端
+			div(class="paybtn" v-if="payType == 'ALIPAY' && isMobile")
+				a(:href="startAlipayUrl" class="btn btn-primary" target="_blank") 启动支付宝App支付
+
+			//- /支付宝移动端
+			div(class="qrcode-img-wrapper" data-role="qrPayImgWrapper")
+			
+				div(data-role="qrPayImg" class="qrcode-img-area")
+					div(class="show-qr-container")
+						div(ref="show_qrcode_container" @click="downloadQrcode" v-if="!isExpired")
+						//-过期
+						img(class='show_qrcode_expired' width="300" height="210" 
+								:src="loadImg('/asstes/images/qrcode_timeout.png')" v-if='isExpired')
+						//-微信icon
+						img(class="pay-icons" 
+								:src="loadImg('/asstes/images/logo_weixin.png')" v-if="payType == 'WXPAY' && !isExpired")
+						//-支付宝icon
+						img(class="pay-icons" 
+								:src="loadImg('/asstes/images/logo_alipay.png')" v-if="payType == 'ALIPAY' && !isExpired")
+					
+			div(class="handler-panel")
+			
+				//-微信手机端
+				div(class="payweixinbtn" v-if="payType == 'WXPAY' && isMobile")
+					a(:href="'http://mobile.qq.com/qrcode?url=' + qrcodeUrl" 
+						target="_blank"  class="btn btn-primary") 1.先保存二维码到手机
+					
+				div(class="payweixinbtn dom-interval" v-if="payType == 'WXPAY' && isMobile")
+					a(href="weixin://" class="btn btn-primary") 2.打开微信，扫一扫本地图片
+					
+				//-/微信手机端
+				
+				//-公共模块
+				div(class="time-item dom-interval")
+				
+					div(class="time-item")
+						h1(v-if="!isExpired") {{ payType == 'ALIPAY' && isMobile ? "支付完成后，请返回此页" : "付款即时到账 未到账可联系我们" }}
+						h1(v-if="isExpired") {{isExpired ? "支付链接已失效，请重新生成！" : ""}}
+					
+					div(class="time-item")
+						h1 订单:{{ payData.orderid }}
+						h1(style={'color':'#797979', 'font-size': '13px'}) 备注:{{ payData.remark }}
+					strong {{countdownData.hours}}时
+					strong {{countdownData.minutes}}分
+					strong {{countdownData.seconds}}秒
+				//-/公共模块
+		
+				//-微信PC端
+				div(class="tip" v-if="!isMobile && payType == 'WXPAY'")
+
+					div(class="ico-scan")
+					div(class="tip-text")
+						p 打开微信 [扫一扫]
+				//-/微信PC端
+				
+				//-支付宝PC端
+				div(class="tip" v-if="!isMobile && payType == 'ALIPAY'")
+					div(class="ico-scan")
+					div(class="tip-text")
+						p 打开支付宝 [扫一扫]
+					
+				//-/支付宝PC端
+				div(class="tip-text")
+			
+		//-倒计时组件
+		comp-count-down(
+			v-on:countdowndata="countDownEventHandle"
+			v-on:countdownstart="countDownStart"
+			v-on:countdownend="countDownEnd"
+			v-on:initdata="getInitData"
+		)
+
+	script
+		include helps/statistics.js

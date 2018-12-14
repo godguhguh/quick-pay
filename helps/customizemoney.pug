@@ -1,0 +1,72 @@
+include common.pug
+    title 制定个人支付
+    link(rel="stylesheet" href="http://ukafu.com/themes/ufaka/person/token/layui.css" media="all")
+    style
+        include customizepay.css
+body
+    - var url = customVariable.url.replace(/"/g, '');
+    div(class="pay-container")
+        div(class="title")
+            h2 PXPAY制定个人支付（自定义金额）
+        
+        div(class="createorder-desc-info")
+            h1 请填写完整信息
+            p 该操作可制定一套属于自己的支付系统
+            p 如果没有获取到商户ID 和 密钥 ,请看 
+                a(href="help.html" style="color: #0064ff;text-decoration: underline;") 帮助
+            
+        
+        form(class="layui-form" action=url + "/order.php" lay-filter="component-form-group" method="GET")
+            div(class="create-order-mainform-container")
+        
+                div(class="layui-form-item")
+                    label(class="layui-form-label" style="text-align:left;") 商户ID
+                    div(class="layui-input-block")
+                        input(type="text" name="appid" lay-verify="required|number" placeholder="请输入商户ID" class="layui-input")/
+                    
+                
+
+                div(class="layui-form-item")
+                   label(class="layui-form-label" style="text-align:left;") 商户秘钥
+                   div(class="layui-input-block")
+                        input(type="text" name="merchant_secret" lay-verify="required" placeholder="请输入商户秘钥" class="layui-input")/
+
+                div(class="layui-form-item")
+                    label(class="layui-form-label" style="text-align:left;") 收款金额
+                    div(class="layui-input-block")
+                        input(type="text" name="money" lay-verify="required|customizemoney" placeholder="收款金额不得大于1万元" autocomplete="off" class="layui-input")/
+					    
+                        span 收款金额,必须有对应的二维码.二维码在APP 中上传
+
+                div(class="layui-form-item")
+                   label(class="layui-form-label" style="text-align:left;") 备注
+                   div(class="layui-input-block")
+                        input(type="text" name="remark" lay-verify="customizeremark" placeholder="请输入备注" class="layui-input")/
+
+                div(class="layui-form-item" style="display:none;")                    
+                    div(class="layui-input-block")
+                        input(type="text" name="act" value="new" class="layui-input")/
+
+                div(class="layui-form-item" style="display:none;")                    
+                    div(class="layui-input-block")
+                        input(type="text" name="customizemoney" value="1" class="layui-input")/        
+
+                div(class="layui-form-item")
+                    label(class="layui-form-label" style="text-align:left;") 支付方式
+                    div(class="layui-input-block")
+                        img(src="http://ukafu.com/themes/ufaka/person/token/images/alipay.png" width='25' style='vertical-align: text-top;')/
+                        input(type="radio" name="paytype" value="ALIPAY" title="支付宝" checked)
+
+                        img(src="http://ukafu.com/themes/ufaka/person/token/images/wechat.png" width='25' style='vertical-align: text-top;')/
+                        input(type="radio" name="paytype" value="WXPAY" title="微信")
+
+                div(class="layui-form-item")
+                    div(class="layui-input-block")
+                        button(class="layui-btn" lay-submit="" lay-filter="component-form-pay") 立刻支付
+            br(style="clear: both;")
+
+    script(src="http://ukafu.com/themes/ufaka/person/token/layui.js" charset="utf-8")
+    script 
+        include statistics.js
+    script 
+        include customizemoney.js

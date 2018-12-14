@@ -1,0 +1,28 @@
+include helps/common.pug
+	title 商品支付失败
+
+	style
+		include helps/result.css
+
+
+body
+	
+	div(id='main-container')
+		h1(class="mod-title")
+			span 支付
+		
+		div(class="mod-ct")
+			div(class="qrcode-img-wrapper" data-role="qrPayImgWrapper")
+				div(data-role="qrPayImg" class="qrcode-img-area")
+					div(class="show-qr-container")
+						img(width="126" height="100" src="/static/pay-failure.png?" + customVariable.times_tamp)
+						p(class="pay-complete") 支付失败
+					
+				
+			
+			div(class="order-detail")
+			div(class="tip-text")
+
+	script
+		include helps/statistics.js	
+		

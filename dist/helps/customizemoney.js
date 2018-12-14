@@ -1,0 +1,1 @@
+layui.use(["form"],function(){var n=layui.form;n.verify({customizemoney:function(n){return/^\d{1,9}(\.{0}|\.{1}\d{1,2})?$/.test(n)?1e4<n?"收款金额不得大于1万元":n<=0?"收款金额不得小于0元":void 0:"请输入正确的金额"},customizeremark:function(n){if(n&&20<n.length)return"备注信息过长"}}),n.render(null,"component-form-group"),n.on("submit(component-form-pay)",function(n){})});

@@ -1,0 +1,21 @@
+include common.pug
+    
+    title 设置权限
+
+    style
+      include help.css
+
+body
+    
+    div(class="container")
+        h2 打开APP 点击“服务权限”  以小米为例
+        img(src="/static/help/permission001.png?" + customVariable.times_tamp)
+    
+        h2 找到PXPAY 点击开启开关
+        img(src="/static/help/permission002.png?" + customVariable.times_tamp)
+    
+        h2 点击允许
+        img(src="/static/help/permission003.png?" + customVariable.times_tamp)
+        
+    script
+        include statistics.js

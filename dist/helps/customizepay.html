@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <title>制定个人支付</title>
+    <link rel="stylesheet" href="http://ukafu.com/themes/ufaka/person/token/layui.css" media="all">
+    <style>body{overflow-x:hidden}.layui-footer{position:fixed;left:0;right:0;bottom:0;height:44px;line-height:44px;padding:0 15px;background-color:#eee;padding:10px 0;text-align:center;box-shadow:0 -1px 2px 0 rgba(0,0,0,.05)}.pay-money-container{margin-right:30px;font-size:20px;color:#d44d44}.pay-money-container .money-title{color:#1a1a1a}.createorder-desc-info{margin-bottom:40px;text-align:center}.createorder-desc-info h1{margin-bottom:20px}.createorder-desc-info p{margin-top:6px}.create-order-mainform-container{max-width:800px;margin:0 auto;padding-right:13px}.pay-container{padding:0 0;max-width:1170px;margin:0 auto;position:relative;margin-bottom:30px;overflow:hidden;background:#fff;border-radius:8px;border:1px solid #dcdcdc;border-color:rgba(0,0,0,.14);box-shadow:0 3px 8px -6px rgba(0,0,0,.1)}.title{padding-left:30px;position:relative;z-index:0;height:60px;padding:0 10px 0 24px;border-bottom:1px solid #d4d4d4;border-radius:8px 8px 0 0;box-shadow:rgba(0,0,0,.06) 0 1px 7px;background:#f3f3f3;background:-webkit-linear-gradient(#fbfbfb,#ececec);background:linear-gradient(#fbfbfb,#ececec);line-height:60px;font-size:13px;margin-bottom:30px;color:#333;display:flex;justify-content:space-between;align-items:center}</style>
+</head>
+
+</html>
+
+<body>
+    <div class="pay-container">
+        <div class="title">
+            <h2>PXPAY制定个人支付（限制金额）</h2>
+        </div>
+        <div class="createorder-desc-info">
+            <h1>请填写完整信息</h1>
+            <p>该操作可制定一套属于自己的支付系统</p>
+            <p>如果没有获取到商户ID 和 密钥 ,请看 <a href="help.html" style="color:#0064ff;text-decoration:underline">帮助</a></p>
+        </div>
+        <form class="layui-form" action="/order.php" lay-filter="component-form-group" method="GET">
+            <div class="create-order-mainform-container">
+                <div class="layui-form-item"><label class="layui-form-label" style="text-align:left">商户ID</label>
+                    <div class="layui-input-block"><input class="layui-input" type="text" name="appid" lay-verify="required|number" placeholder="请输入商户ID"></div>
+                </div>
+                <div class="layui-form-item"><label class="layui-form-label" style="text-align:left">商户秘钥</label>
+                    <div class="layui-input-block"><input class="layui-input" type="text" name="merchant_secret" lay-verify="required" placeholder="请输入商户秘钥"></div>
+                </div>
+                <div class="layui-form-item"><label class="layui-form-label" style="text-align:left">收款金额</label>
+                    <div class="layui-input-block"><input class="layui-input" type="text" name="money" lay-verify="required|customizemoney" placeholder="收款金额不得大于1元" autocomplete="off"><span>收款金额,必须有对应的二维码.二维码在APP 中上传</span></div>
+                </div>
+                <div class="layui-form-item" style="display:none">
+                    <div class="layui-input-block"><input class="layui-input" type="text" name="act" value="new"></div>
+                </div>
+                <div class="layui-form-item"><label class="layui-form-label" style="text-align:left">支付方式</label>
+                    <div class="layui-input-block"><img src="http://ukafu.com/themes/ufaka/person/token/images/alipay.png" width="25" style="vertical-align:text-top"><input type="radio" name="paytype" value="ALIPAY" title="支付宝" checked="checked"><img src="http://ukafu.com/themes/ufaka/person/token/images/wechat.png" width="25" style="vertical-align:text-top"><input type="radio" name="paytype" value="WXPAY" title="微信"></div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block"><button class="layui-btn" lay-submit="" lay-filter="component-form-pay">立刻支付</button></div>
+                </div>
+            </div><br style="clear:both">
+        </form>
+    </div>
+    <script src="http://ukafu.com/themes/ufaka/person/token/layui.js" charset="utf-8"></script>
+    <script>
+        var _hmt = _hmt || [];
+        ! function() {
+            var e = document.createElement("script");
+            e.src = "https://hm.baidu.com/hm.js?d7e42971a486a73b46f043f0d700f362";
+            var t = document.getElementsByTagName("script")[0];
+            t.parentNode.insertBefore(e, t)
+        }()
+    </script>
+    <script>
+        layui.use(["form"], function() {
+            var o = layui.form;
+            o.verify({
+                customizemoney: function(o) {
+                    return /^\d{1,9}(\.{0}|\.{1}\d{1,2})?$/.test(o) ? 1 < o ? "收款金额不得大于1元" : o <= 0 ? "收款金额不得小于0元" : void 0 : "请输入正确的金额"
+                }
+            }), o.render(null, "component-form-group"), o.on("submit(component-form-pay)", function(o) {})
+        })
+    </script>
+</body>

@@ -1,0 +1,35 @@
+include helps/common.pug
+	meta(name="description" content="PXPAY,开源的个人收款支付工具。为支付宝、微信支付的个人账户，提供即时到账收款API接口,个人收款源码。")
+	title PXPAY 下单Demo
+	style
+		include helps/index.css	
+
+body
+	- var url = customVariable.url.replace(/"/g, '');
+	div(class="call-to-action")
+		h3 1) 自动生成任意金额+随机备注演示
+		a(class="btn btn-alipay more" href=url + '/order.php?act=new&paytype=ALIPAY&remark=true')
+			img(src="http://ukafu.com/themes/ufaka/person/token/images/alipay.png" alt="支付宝付款")/ 支付宝
+		
+		h3 2) 支付1分钱,演示个人支付流程
+		a(class="btn btn-alipay more" href=url + '/order.php?act=new&paytype=ALIPAY')
+			img(src="http://ukafu.com/themes/ufaka/person/token/images/alipay.png" alt="支付宝付款")/ 支付宝 或
+
+		a(href=url + "/order.php?act=new&paytype=WXPAY" class="btn btn-default contact")
+			img(src="http://ukafu.com/themes/ufaka/person/token/images/wechat.png" alt="微信付款")/ 微信
+		
+		h3(style="margin-top:30px;height:30px;")  3) 创建我自己的收款
+		a(class="btn btn-alipay more" href='https://fir.im/nmc9')  1 安卓 APP下载
+
+		a(class="btn btn-customize-pay more" href='https://pxpay.ukafu.com/person/index/gettoken') 2 获取 token
+		a( class="btn btn-alipay more" href='helps/help.html') 3 获取商户ID和密钥
+		a(class="btn btn-customize-pay more" href='helps/customizepay.html') 4 填写收款信息,测试
+		a(class="btn btn-alipay more" href='helps/customizemoney.html') 5 填写收款信息,自定义金额
+		h3(style="margin-top:30px;height:30px;") 3) 源码下载地址
+		a(href='https://gitee.com/DaLianZhiYiKeJi/xpay')  安卓监控源码:https://gitee.com/DaLianZhiYiKeJi/xpay
+		br/
+		br/
+		a(href='https://gitee.com/sipengcode/quick-pay') 下单页面,对接SDK,本项目源码:https://gitee.com/sipengcode/quick-pay
+
+	script
+		include helps/statistics.js

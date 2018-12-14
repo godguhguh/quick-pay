@@ -1,0 +1,37 @@
+include common.pug
+    
+    title 帮助
+    
+    style
+     include help.css
+    
+
+body
+    
+    div(class="container")
+         
+        h2 下载APP赋予通知权限（该权限用于接收付款成功通知）后点击获取TOKEN。
+            a(href="./settingpermission.html") 权限设置
+          
+        img(src="/static/help/001.png?" + customVariable.times_tamp)
+        
+        h2 填写完整信息并点击“立刻支付”,推荐使用支付宝
+        img(src="/static/help/002.png?" + customVariable.times_tamp)
+        
+        h2 付款,推荐使用支付宝
+        img(src="/static/help/003.png?" + customVariable.times_tamp)
+        
+        h2 成功获取TOKEN
+        img(src="/static/help/004.png?" + customVariable.times_tamp)
+        
+        h2 打开APP将刚获取到的TOKEN复制至此，并点击确认按键
+        img(src="/static/help/005.png?" + customVariable.times_tamp)
+        
+        h2 点击商户秘钥
+        img(src="/static/help/006.jpg?" + customVariable.times_tamp)
+        
+        h2 即可查看商户ID和商户秘钥
+        img(src="/static/help/007.jpg?" + customVariable.times_tamp)
+    script
+        include statistics.js    
+    

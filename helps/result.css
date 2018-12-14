@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, .body {
+    background: #f7f7f7;
+    height: 100%;
+    max-width: 640px;
+    min-width: 300px;
+    min-height: 100%;
+    background: #F4F2F4;
+    margin: 0 auto;
+}
+
+.mod-title {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    background: #fff
+}
+
+.mod-ct {
+    min-width: 300px;
+    max-width: 640px;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    text-align: center;
+    color: #333;
+    border: 1px solid #e5e5e5;
+    border-top: none
+}
+
+
+.item-title {
+    background: none;
+    line-height: 25px;
+    font-size: 24px;
+    padding: 0 10px;
+    float: left;
+}
+.pay-complete {
+    font-size: 20px;
+    color: #ED6D02;
+    padding-top: 30px;
+}
+
+.mod-ct {
+    background: none;
+    border: 0;
+}
+
+.mod-title {
+    background: #ED6D02;
+    color: #fff;
+    font-size: 19px;
+}
+
+.tip-text {
+    height: 25px;
+    background: url('/static/ware.png') 0px -35px repeat-x;
+    background-size: 47px;
+}
+
+.qrcode-img-area {
+    background: #fff;
+    padding-bottom: 28px;
+    padding-top: 66px;
+}

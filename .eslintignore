@@ -1,0 +1,8 @@
+/build/
+/config/
+/dist/
+
+/src/libs/
+
+gulpfile.js
+helps/statistics.js
